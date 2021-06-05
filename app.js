@@ -1,12 +1,8 @@
 const express = require("express");
-const { post } = require("request");
-// const bodyParser = require("body-parser");
-const request = require("request");
 const app = express();
 const https = require('https');
 
 app.use(express.static("public"));
-// app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({extended: true}));
 
 app.get("/",function(req,res){
@@ -35,17 +31,9 @@ app.post("/",function(req,res){
 	const options = {
 		
 		method: "POST",
-		auth: "manvendra:bbca7794cf3937ac44a73cbac68785fd-us6",
-		// body: jsonData
+		auth: "manvendra12:6b58669b72e684733c8fc6776115b808-us6"
 
 	}
-	// request(options,function(error,response,body){
-	// 	if(error){
-	// 		console.log(error);
-	// 	}else{
-	// 		console.log(response.statusCode);
-	// 	}
-	// })
 	const request = https.request(url,options, (response) => {
 		console.log(response.statusCode);
 		if(response.statusCode == 200){
@@ -68,9 +56,10 @@ app.post('/failure',function(req,res){
 	res.redirect('/');
 })
 
-app.listen(3000,function(){
-	console.log("Running on port 3000");
+app.listen( process.env.PORT ||3000 ,function(){
+	console.log("Server is Running");
 });
 
 // bbca7794cf3937ac44a73cbac68785fd-us6
 // list id: 313a362295
+
