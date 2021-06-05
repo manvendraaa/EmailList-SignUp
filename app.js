@@ -49,20 +49,24 @@ app.post("/",function(req,res){
 	const request = https.request(url,options, (response) => {
 		console.log(response.statusCode);
 		if(response.statusCode == 200){
-			res.end("success");
+			res.sendFile(__dirname + "/success.html");
+			
 		}
 		else {
-			res.end("fail");
+			res.sendFile(__dirname + "/failure.html");
 		}
 
 		response.on("data", (data) => {
-            // console.log(JSON.parse(data));
+            // console.log(JSON.parse(data)); 
         });
 	})
 	request.write(jsonData);
     request.end();
 
 });
+app.post('/failure',function(req,res){
+	res.redirect('/');
+})
 
 app.listen(3000,function(){
 	console.log("Running on port 3000");
